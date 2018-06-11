@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "451723712843",
+    "firebase_url": "https://deprecure.firebaseio.com",
+    "project_id": "deprecure",
+    "storage_bucket": "deprecure.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:451723712843:android:f1d5d53447df18dc",
+        "android_client_info": {
+          "package_name": "com.example.android.deprecure"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "451723712843-p75fs3ubep6egncfkht46cl8fovm0jif.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.deprecure",
+            "certificate_hash": "7ac7b5de82790285038ac73cd939c7fcb32f9fa9"
+          }
+        },
+        {
+          "client_id": "451723712843-neff4nc008ai0idb1m5t7shurna3qepu.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "451723712843-neff4nc008ai0idb1m5t7shurna3qepu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwZjjm3cnZpGQTh_akh_685KEUGya190o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "451723712843-neff4nc008ai0idb1m5t7shurna3qepu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
