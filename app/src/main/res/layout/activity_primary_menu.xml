@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.deprecure.PrimaryMenuActivity"
+    android:background="@color/colorPrimary">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/menu_logo"
+        android:layout_width="197dp"
+        android:layout_height="54dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_toolbar"
+        android:tint="@android:color/white"
+        android:background="@android:color/transparent"/>
+
+    <Button
+        android:id="@+id/menu_test"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Test"
+        app:layout_constraintBottom_toTopOf="@+id/menu_about"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu_diary"
+        android:background="?attr/selectableItemBackground"
+        android:textColor="@android:color/white"
+        android:elevation="0dp"
+        android:stateListAnimator="@null"/>
+
+    <Button
+        android:id="@+id/menu_diary"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="56dp"
+        android:text="Diary"
+        app:layout_constraintBottom_toTopOf="@+id/menu_test"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu_logo"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:background="?attr/selectableItemBackground"
+        android:textColor="@android:color/white"
+        android:elevation="0dp"
+        android:stateListAnimator="@null"/>
+
+    <Button
+        android:id="@+id/menu_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:text="About"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu_test"
+        android:background="?attr/selectableItemBackground"
+        android:textColor="@android:color/white"
+        android:stateListAnimator="@null"/>
+</android.support.constraint.ConstraintLayout>
