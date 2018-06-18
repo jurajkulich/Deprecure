@@ -1,6 +1,7 @@
 package com.example.android.deprecure;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -12,7 +13,7 @@ import android.view.View;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DiaryActivity extends AppCompatActivity implements AddItemToDiaryFragment.OnFragmentInteractionListener{
+public class DiaryActivity extends AppCompatActivity {
 
     @BindView(R.id.diary_fab_add_button)
     FloatingActionButton mFab;
@@ -30,15 +31,14 @@ public class DiaryActivity extends AppCompatActivity implements AddItemToDiaryFr
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*
                 Fragment fragment = new AddItemToDiaryFragment();
                 FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.diary_fragment_container, fragment).commit();
+                */
+                Intent intent = new Intent(getApplicationContext(), AddItemToDiaryActivity.class);
+                startActivity(intent);
             }
         });
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 }
