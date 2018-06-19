@@ -4,17 +4,10 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp">
 
-    <ImageView
-        android:id="@+id/mood_smile"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"/>
-
     <TextView
-        android:id="@+id/mood_name"
+        android:id="@+id/activity_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="2dp"/>
+        android:layout_gravity="center"/>
 
 </LinearLayout>
