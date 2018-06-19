@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.deprecure.model.Mood;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 public class MoodAdapter extends RecyclerView.Adapter<MoodAdapter.ViewHolder> {
 
     private ArrayList<Mood> mMoods;
+    private Context mContext;
 
     public MoodAdapter(ArrayList<Mood> mMoods) {
         this.mMoods = mMoods;
@@ -27,8 +29,8 @@ public class MoodAdapter extends RecyclerView.Adapter<MoodAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        mContext = parent.getContext();
+        LayoutInflater layoutInflater = LayoutInflater.from(mContext);
 
         View itemView = layoutInflater.inflate(R.layout.item_mood, parent, false);
         ViewHolder viewHolder = new ViewHolder(itemView);
@@ -40,6 +42,7 @@ public class MoodAdapter extends RecyclerView.Adapter<MoodAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Mood mood = mMoods.get(position);
         holder.mMoodName.setText(mood.getMoodName());
+        holder.mMoodSmile.setImageDrawable(mContext.getDrawable(mood.getMoodDrawableId()));
     }
 
     @Override
@@ -50,10 +53,12 @@ public class MoodAdapter extends RecyclerView.Adapter<MoodAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView mMoodName;
+        public ImageView mMoodSmile;
 
         public ViewHolder( View itemView ) {
             super(itemView);
             mMoodName = itemView.findViewById(R.id.mood_name);
+            mMoodSmile = itemView.findViewById(R.id.mood_smile);
         }
     }
 
