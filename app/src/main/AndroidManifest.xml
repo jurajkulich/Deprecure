@@ -20,7 +20,9 @@
         </activity>
         <activity android:name=".PrimaryMenuActivity"></activity>
         <activity android:name=".DiaryActivity"></activity>
-        <activity android:name=".AddItemToDiaryActivity"></activity>
+        <activity android:name=".AddItemToDiaryActivity"
+                  android:windowSoftInputMode="adjustResize">
+        </activity>
     </application>
 
 </manifest>
