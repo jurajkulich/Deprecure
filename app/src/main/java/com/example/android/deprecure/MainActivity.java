@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 199;
+    // private static final String USER_UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     private FirebaseAuth auth;
 

@@ -14,6 +14,10 @@ public class Mood {
         this.moodDrawableId = moodDrawableId;
     }
 
+    public Mood() {
+
+    }
+
     public String getMoodName() {
         return moodName;
     }
