@@ -65,7 +65,7 @@ public class DiaryActivity extends AppCompatActivity implements DiaryEntriesAdap
                                 mDiaryEntries.add(entry);
                                 Log.d("Diary", documentSnapshot.getId() + " => " + documentSnapshot.getData());
                                 Log.d("Diary", entry.getTextEntry() + entry.getActivityEntries() + entry.getMood().getMoodName());
-                                // mDiaryEntriesAdapter.notifyDataSetChanged();
+                                mDiaryEntriesAdapter.notifyDataSetChanged();
                             }
                         } else {
                             Log.d("Diary", "Error getting documents: ", task.getException());

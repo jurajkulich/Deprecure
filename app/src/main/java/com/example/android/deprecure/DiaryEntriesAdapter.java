@@ -51,8 +51,10 @@ public class DiaryEntriesAdapter extends RecyclerView.Adapter<DiaryEntriesAdapte
         holder.mEntryText.setText(diaryEntry.getTextEntry());
         holder.mEntryMood.setText(diaryEntry.getMood().getMoodName());
         String activities = "";
-        for( String activity : diaryEntry.getActivityEntries()) {
-            activities += activity + " ";
+        if( diaryEntry.getActivityEntries() != null) {
+            for (String activity : diaryEntry.getActivityEntries()) {
+                activities += activity + " ";
+            }
         }
         holder.mEntryActivities.setText(activities);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
