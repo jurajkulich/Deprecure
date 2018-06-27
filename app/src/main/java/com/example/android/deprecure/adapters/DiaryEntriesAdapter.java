@@ -1,4 +1,4 @@
-package com.example.android.deprecure;
+package com.example.android.deprecure.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.android.deprecure.R;
 import com.example.android.deprecure.model.DiaryEntry;
 
 import java.util.ArrayList;

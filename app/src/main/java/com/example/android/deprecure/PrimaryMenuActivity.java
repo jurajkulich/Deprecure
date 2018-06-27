@@ -22,6 +22,9 @@ public class PrimaryMenuActivity extends AppCompatActivity {
     @BindView(R.id.menu_diary)
     Button mDiaryButton;
 
+    @BindView(R.id.menu_test)
+    Button mTestButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +37,14 @@ public class PrimaryMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), DiaryActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mTestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), DepressionTestActivity.class);
                 startActivity(intent);
             }
         });

@@ -1,6 +1,5 @@
 package com.example.android.deprecure;
 
-import android.app.Activity;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,10 +9,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.android.deprecure.adapters.ActivityAdapter;
+import com.example.android.deprecure.adapters.MoodAdapter;
 import com.example.android.deprecure.model.DiaryEntry;
 import com.example.android.deprecure.model.Mood;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
