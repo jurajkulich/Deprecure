@@ -10,25 +10,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <Button
-        android:text="Not at all"
+    <RadioGroup
+        android:id="@+id/test_answers_radiogroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"/>
+        android:orientation="vertical">
+        
+        <RadioButton
+            android:id="@+id/radio_not_at_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/not_at_all"/>
 
-    <Button
-        android:text="Several days"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <RadioButton
+            android:id="@+id/radio_several_days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/several_days"/>
 
-    <Button
-        android:text="More than half the days"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <RadioButton
+            android:id="@+id/radio_more_than_half"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/more_than_half_the_days"/>
 
-    <Button
-        android:text="Nearly every day"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <RadioButton
+            android:id="@+id/radio_nearly_every_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nearly_every_day"/>
+
+    </RadioGroup>
 
 </LinearLayout>
