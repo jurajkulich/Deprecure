@@ -20,7 +20,8 @@
             android:id="@+id/radio_not_at_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/not_at_all"/>
+            android:text="@string/not_at_all"
+            android:checked="true"/>
 
         <RadioButton
             android:id="@+id/radio_several_days"
@@ -41,5 +42,15 @@
             android:text="@string/nearly_every_day"/>
 
     </RadioGroup>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/depression_test_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_action_check_white"
+        android:layout_gravity="bottom|end"
+        android:visibility="gone"
+        android:focusable="true"/>
 
 </LinearLayout>

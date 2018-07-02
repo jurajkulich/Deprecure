@@ -23,7 +23,7 @@ public class ScreenTestSlidePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return ScreenTestSlideFragment.getInstance(mQuestions[position]);
+        return ScreenTestSlideFragment.getInstance(mQuestions[position], position);
     }
 
     @Override
