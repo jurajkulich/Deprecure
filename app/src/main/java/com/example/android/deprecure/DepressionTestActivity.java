@@ -1,9 +1,12 @@
 package com.example.android.deprecure;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.android.deprecure.adapters.ScreenTestSlidePagerAdapter;
@@ -26,7 +29,7 @@ public class DepressionTestActivity extends FragmentActivity implements ScreenTe
             "Thoughts that you would be better off dead, or of hurting yourself in some way?"
     };
 
-    private int[] answers =  new int[9];
+    private int[] answers = new int[9];
 
     @BindView(R.id.depression_test_viewpager)
     ViewPager mViewPager;
@@ -50,23 +53,22 @@ public class DepressionTestActivity extends FragmentActivity implements ScreenTe
 
     @Override
     public void clickedAnswer(int answer, int position) {
+        // clicked FAB for test complete
         if( answer == -1) {
-            int points = answerResult();
-            if( points <= 4) {
-                Toast.makeText(this, "None depression", Toast.LENGTH_SHORT).show();
-            } else if( points <= 9) {
-                Toast.makeText(this, "Mild depression", Toast.LENGTH_SHORT).show();
-            } else if( points <= 14) {
-                Toast.makeText(this, "Moderate depression", Toast.LENGTH_SHORT).show();
-            } else if( points <= 19) {
-                Toast.makeText(this, "Moderately severe depression", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Severe depression", Toast.LENGTH_SHORT).show();
-            }
+            DepressionTestResultFragment fragment
+                    = DepressionTestResultFragment.getInstance(answerResult());
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().
+                    add(R.id.depression_test_result_placeholder, fragment).commit();
+            findViewById(R.id.depression_test_result_placeholder).setVisibility(View.VISIBLE);
             return;
         }
-        Toast.makeText(this, position + ": " + answer, Toast.LENGTH_SHORT).show();
+
+        // Toast.makeText(this, position + ": " + answer, Toast.LENGTH_SHORT).show();
         answers[position] = answer;
+        if( position < 8) {
+            mViewPager.setCurrentItem(++position);
+        }
     }
 
     private int answerResult() {
