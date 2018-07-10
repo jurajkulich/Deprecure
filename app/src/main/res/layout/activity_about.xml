@@ -7,7 +7,15 @@
     tools:context="com.example.android.deprecure.AboutActivity">
     
     <TextView
+        android:id="@+id/about_smiles"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Smiles pack is designed by Smartline from Flaticon."/>
+
+    <TextView
+        android:id="@+id/about_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This app is a capstone project for Android Developer Nanodegree from Udacity."/>
 
 </android.support.constraint.ConstraintLayout>

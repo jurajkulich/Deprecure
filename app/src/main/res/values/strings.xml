@@ -12,6 +12,8 @@
     <string name="several_days">Several days</string>
     <string name="more_than_half_the_days">More than half the days</string>
     <string name="nearly_every_day">Nearly every day</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 
 
 </resources>
