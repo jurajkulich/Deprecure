@@ -14,6 +14,10 @@
     <string name="nearly_every_day">Nearly every day</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+    <string name="test_question">Over the last two weeks, how often have you been bothered by any of the following problems?</string>
+    <string name="depression_strong_comment">If you’re having a bad thoughts and you are thinking about hurting or killing yourself
+        please reach out straight away and talk to someone who’s trained to help. Even if you feel like no-one in the world gets you right now, there are people who can support you.</string>
+    <string name="depression_weak_comment">You\'re doing very well! Keep it up!</string>
 
 
 </resources>

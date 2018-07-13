@@ -3,4 +3,13 @@
     <color name="colorPrimary">#383838</color>
     <color name="colorPrimaryDark">#1E1F1F</color>
     <color name="colorAccent">#DEB92B</color>
+
+    <color name="white">#FFF</color>
+
+    <color name="smile_level_0">#DEB92B</color>
+    <color name="smile_level_1">#D79422</color>
+    <color name="smile_level_2">#D16F19</color>
+    <color name="smile_level_3">#CB4A11</color>
+    <color name="smile_level_4">#C52508</color>
+    <color name="smile_level_5">#BF0000</color>
 </resources>

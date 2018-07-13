@@ -25,6 +25,8 @@ public class MoodRemoteViewsService extends RemoteViewsService {
                 getResources().getIdentifier("sceptic", "drawable", "com.example.android.deprecure")));
         moods.add(new Mood("Sad",
                 getResources().getIdentifier("sad", "drawable", "com.example.android.deprecure")));
+        moods.add(new Mood("Angry",
+                getResources().getIdentifier("angry", "drawable", "com.example.android.deprecure")));
         moods.add(new Mood("Crying",
                 getResources().getIdentifier("crying", "drawable", "com.example.android.deprecure")));
         return new MoodRemoteViewsFactory(this, moods);

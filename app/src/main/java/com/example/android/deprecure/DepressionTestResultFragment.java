@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,7 +21,11 @@ public class DepressionTestResultFragment extends Fragment {
 
     private int mResult;
 
-    private TextView mResultTextView;
+    @BindView(R.id.fragment_depression_test_result)
+    TextView mResultTextView;
+
+    @BindView(R.id.fragment_depression_test_result_comment)
+    TextView mResultComment;
 
     public DepressionTestResultFragment() {
         // Required empty public constructor
@@ -47,12 +54,17 @@ public class DepressionTestResultFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_depression_test_result, container, false);
+        ButterKnife.bind(this, rootView);
 
-        mResultTextView = rootView.findViewById(R.id.fragment_depression_test_result);
-
+        if( mResult <= 9 ) {
+            mResultComment.setText(R.string.depression_weak_comment);
+        } else {
+            mResultComment.setText(getString(R.string.depression_strong_comment));
+        }
 
         if( mResult <= 4) {
             mResultTextView.setText("None depression");
+            mResultComment.setText("You're doing very well! Keep it up!");
         } else if( mResult <= 9) {
             mResultTextView.setText("Mild depression");
         } else if( mResult <= 14) {

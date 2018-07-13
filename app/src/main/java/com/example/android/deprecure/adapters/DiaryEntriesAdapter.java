@@ -1,12 +1,16 @@
 package com.example.android.deprecure.adapters;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.deprecure.R;
@@ -50,7 +54,10 @@ public class DiaryEntriesAdapter extends RecyclerView.Adapter<DiaryEntriesAdapte
         final DiaryEntry diaryEntry = mDiaryEntries.get(position);
         Log.d("Adapter", diaryEntry.getTextEntry());
         holder.mEntryText.setText(diaryEntry.getTextEntry());
-        holder.mEntryMood.setText(diaryEntry.getMood().getMoodName());
+        // holder.mEntryMood.setText(diaryEntry.getMood().getMoodName());
+        holder.mMoodSmile.setImageResource(diaryEntry.getMood().getMoodDrawableId());
+        setSmileColor(holder, diaryEntry.getMood().getMoodName());
+
         String activities = "";
         if( diaryEntry.getActivityEntries() != null) {
             for (String activity : diaryEntry.getActivityEntries()) {
@@ -77,12 +84,47 @@ public class DiaryEntriesAdapter extends RecyclerView.Adapter<DiaryEntriesAdapte
         public TextView mEntryText;
         public TextView mEntryActivities;
         public TextView mEntryMood;
+        public ImageView mMoodSmile;
 
         public ViewHolder( View itemView ) {
             super(itemView);
             mEntryText = itemView.findViewById(R.id.entry_text);
             mEntryActivities = itemView.findViewById(R.id.entry_activities);
-            mEntryMood = itemView.findViewById(R.id.entry_mood);
+            // mEntryMood = itemView.findViewById(R.id.entry_mood);
+            mMoodSmile = itemView.findViewById(R.id.diary_entry_smile);
+        }
+    }
+
+    private void setSmileColor(ViewHolder holder, String mood) {
+        switch(mood) {
+            case "Happy": {
+                holder.mMoodSmile.setColorFilter(ContextCompat.getColor(mContext, R.color.smile_level_0));
+                break;
+            }
+            case "Smiling": {
+                holder.mMoodSmile.setColorFilter(ContextCompat.getColor(mContext, R.color.smile_level_1));
+                break;
+            }
+            case "Neutral": {
+                holder.mMoodSmile.setColorFilter(ContextCompat.getColor(mContext, R.color.smile_level_2));
+                break;
+            }
+            case "Sad": {
+                holder.mMoodSmile.setColorFilter(ContextCompat.getColor(mContext, R.color.smile_level_3));
+                break;
+            }
+            case "Angry": {
+                holder.mMoodSmile.setColorFilter(ContextCompat.getColor(mContext, R.color.smile_level_4));
+                break;
+            }
+            case "Crying": {
+                holder.mMoodSmile.setColorFilter(ContextCompat.getColor(mContext, R.color.smile_level_5));
+                break;
+            }
+            default: {
+                holder.mMoodSmile.setColorFilter(ContextCompat.getColor(mContext, R.color.smile_level_0));
+                break;
+            }
         }
     }
 

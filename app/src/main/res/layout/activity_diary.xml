@@ -7,16 +7,36 @@
     android:layout_height="match_parent"
     tools:context="com.example.android.deprecure.DiaryActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/diary_toolbar"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"/>
+        android:layout_height="wrap_content">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/diary_entries_recyclerview"
-        android:layout_width="match_parent"
+
+    <android.support.constraint.ConstraintLayout
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/diary_toolbar"/>
+        android:layout_width="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/diary_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Diary"
+            android:background="@color/colorAccent"
+            android:fitsSystemWindows="true"
+
+            android:elevation="4dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/diary_entries_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/diary_toolbar"/>
+
+
+
+
+    </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/diary_fab_add_button"
@@ -28,3 +48,4 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>
+

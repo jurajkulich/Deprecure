@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.android.deprecure.adapters.DiaryEntriesAdapter;
@@ -32,6 +34,9 @@ public class DiaryActivity extends AppCompatActivity implements DiaryEntriesAdap
     @BindView(R.id.diary_entries_recyclerview)
     RecyclerView mRecyclerView;
 
+    @BindView(R.id.diary_toolbar)
+    Toolbar mToolbar;
+
     private DiaryEntriesAdapter mDiaryEntriesAdapter;
 
     private ArrayList<DiaryEntry> mDiaryEntries;
@@ -41,6 +46,9 @@ public class DiaryActivity extends AppCompatActivity implements DiaryEntriesAdap
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary);
         ButterKnife.bind(this);
+
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mDiaryEntries = new ArrayList<>();
         mDiaryEntriesAdapter = new DiaryEntriesAdapter(mDiaryEntries, this);
@@ -80,5 +88,16 @@ public class DiaryActivity extends AppCompatActivity implements DiaryEntriesAdap
     @Override
     public void onItemClick(String activity) {
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                onBackPressed();
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

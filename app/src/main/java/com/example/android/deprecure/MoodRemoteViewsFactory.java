@@ -62,7 +62,8 @@ public class MoodRemoteViewsFactory implements RemoteViewsService.RemoteViewsFac
         Intent intent = new Intent(mContext, MoodTrackWidgetService.class);
         intent.setAction(ACTION_ADD_MODD);
         intent.putExtras(bundle);
-        remoteViews.setOnClickFillInIntent(R.id.mood_smile,  intent);
+        remoteViews.setOnClickFillInIntent(R.id.mood_item_layout,  intent);
+
         return remoteViews;
     }
 
