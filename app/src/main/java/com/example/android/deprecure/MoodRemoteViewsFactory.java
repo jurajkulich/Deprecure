@@ -52,17 +52,19 @@ public class MoodRemoteViewsFactory implements RemoteViewsService.RemoteViewsFac
 
     @Override
     public RemoteViews getViewAt(int i) {
-        RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(), R.layout.item_mood);
+        RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(), R.layout.item_mood_widget);
         Mood mood = mMoods.get(i);
-        remoteViews.setTextViewText(R.id.mood_name, mood.getMoodName());
-        remoteViews.setImageViewResource(R.id.mood_smile, mood.getMoodDrawableId());
+        remoteViews.setTextViewText(R.id.mood_widget_name, mood.getMoodName());
+        remoteViews.setImageViewResource(R.id.mood_widget_smile, mood.getMoodDrawableId());
 
         Bundle bundle = new Bundle();
-        bundle.putInt("WIDGET_MOOD", i);
-        Intent intent = new Intent(mContext, MoodTrackWidgetService.class);
+        bundle.putString("WIDGET_MOOD", mood.getMoodName());
+        bundle.putInt("WIDGET_MOOD_SMILE", mood.getMoodDrawableId());
+        Intent intent = new Intent();
         intent.setAction(ACTION_ADD_MODD);
         intent.putExtras(bundle);
-        remoteViews.setOnClickFillInIntent(R.id.mood_item_layout,  intent);
+        Log.d("RemoteViews", mood.getMoodName());
+        remoteViews.setOnClickFillInIntent(R.id.mood_item_widget_layout,  intent);
 
         return remoteViews;
     }

@@ -1,6 +1,9 @@
 package com.example.android.deprecure.model;
 
+import com.google.firebase.firestore.ServerTimestamp;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Juraj on 6/13/2018.
@@ -11,6 +14,17 @@ public class DiaryEntry {
     private String textEntry;
     private ArrayList<String> activityEntries;
     private Mood mMood;
+
+    public Date getEntryDate() {
+        return entryDate;
+    }
+
+    public void setEntryDate(Date entryDate) {
+        this.entryDate = entryDate;
+    }
+
+    @ServerTimestamp
+    private Date entryDate;
 
     public DiaryEntry(String textEntry, ArrayList<String> activityEntries, Mood mood) {
         this.textEntry = textEntry;

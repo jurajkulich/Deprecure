@@ -128,5 +128,10 @@ public class DiaryEntriesAdapter extends RecyclerView.Adapter<DiaryEntriesAdapte
         }
     }
 
+    public void updateAdapter(ArrayList<DiaryEntry> mDiaryEntries) {
+        this.mDiaryEntries = mDiaryEntries;
+        notifyDataSetChanged();
+    }
+
 
 }

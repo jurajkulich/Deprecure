@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -57,7 +58,8 @@ public class DiaryActivity extends AppCompatActivity implements DiaryEntriesAdap
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        db.collection("users").document(uid).collection("diary").get().addOnCompleteListener(
+        db.collection("users").document(uid).collection("diary")
+                .orderBy("entryDate", Query.Direction.DESCENDING).get().addOnCompleteListener(
                 new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -67,13 +69,15 @@ public class DiaryActivity extends AppCompatActivity implements DiaryEntriesAdap
                                 mDiaryEntries.add(entry);
                                 Log.d("Diary", documentSnapshot.getId() + " => " + documentSnapshot.getData());
                                 Log.d("Diary", entry.getTextEntry() + entry.getActivityEntries() + entry.getMood().getMoodName());
-                                mDiaryEntriesAdapter.notifyDataSetChanged();
+
                             }
+                            mDiaryEntriesAdapter.updateAdapter(mDiaryEntries);
                         } else {
                             Log.d("Diary", "Error getting documents: ", task.getException());
                         }
                     }
                 }
+
         );
 
         mFab.setOnClickListener(new View.OnClickListener() {

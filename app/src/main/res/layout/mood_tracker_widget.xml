@@ -1,14 +1,23 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorAccent"
-                android:padding="@dimen/widget_margin">
+                android:padding="@dimen/widget_margin"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Track mood to diary"
+        android:gravity="center"
+        android:textSize="18sp"/>
 
     <GridView
         android:id="@+id/widget_mood_gridview"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:numColumns="3"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginBottom="8dp"/>
 
-</RelativeLayout>
+</LinearLayout>

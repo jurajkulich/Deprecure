@@ -3,7 +3,7 @@
                     android:initialKeyguardLayout="@layout/mood_tracker_widget"
                     android:initialLayout="@layout/mood_tracker_widget"
                     android:minHeight="110dp"
-                    android:minWidth="180dp"
+                    android:minWidth="168dp"
                     android:previewImage="@drawable/example_appwidget_preview"
                     android:resizeMode="horizontal|vertical"
                     android:updatePeriodMillis="86400000"

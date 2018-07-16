@@ -125,7 +125,7 @@ public class AddItemToDiaryActivity extends AppCompatActivity implements MoodAda
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 FirebaseFirestore database = FirebaseFirestore.getInstance();
                 DiaryEntry diaryEntry = new DiaryEntry(entryText, new ArrayList<String>(entryActivities.values()), entryMood);
-                database.collection("users").document(uid).collection("diary").document(entryText).set(diaryEntry);
+                database.collection("users").document(uid).collection("diary").document().set(diaryEntry);
             }
         });
 

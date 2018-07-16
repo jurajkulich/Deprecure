@@ -37,7 +37,7 @@
         </receiver>
         <service android:name=".MoodTrackWidgetService">
             <intent-filter>
-                <action android:name="com.example.android.deprecure.action.add_mood"/>
+                <action android:name="com.example.android.deprecure.MoodTrackWidgetService"/>
             </intent-filter>
         </service>
         <service android:name=".MoodRemoteViewsService"
