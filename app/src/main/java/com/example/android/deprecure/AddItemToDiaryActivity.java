@@ -1,6 +1,9 @@
 package com.example.android.deprecure;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -20,7 +23,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,6 +73,11 @@ public class AddItemToDiaryActivity extends AppCompatActivity implements MoodAda
             savedMood = savedInstanceState.getInt("MOOD");
             savedText = savedInstanceState.getString("TEXT");
             savedActivities = savedInstanceState.getIntegerArrayList("ACTIVITIES");
+        }
+
+
+        if( entryActivities == null) {
+            entryActivities = new HashMap<>();
         }
 
         mTextEditText.setText(savedText);
@@ -120,14 +130,21 @@ public class AddItemToDiaryActivity extends AppCompatActivity implements MoodAda
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AddItemToDiaryActivity.this, "Added", Toast.LENGTH_SHORT).show();
+                if( entryMood == null ) {
+                    Toast.makeText(AddItemToDiaryActivity.this, "You have to choose the mood!", Toast.LENGTH_SHORT).show();
+                    setResult(Activity.RESULT_CANCELED);
+                }
                 entryText = mTextEditText.getText().toString();
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 FirebaseFirestore database = FirebaseFirestore.getInstance();
                 DiaryEntry diaryEntry = new DiaryEntry(entryText, new ArrayList<String>(entryActivities.values()), entryMood);
                 database.collection("users").document(uid).collection("diary").document().set(diaryEntry);
+                setResult(Activity.RESULT_OK);
+                finish();
             }
         });
+
+
 
     }
 
@@ -140,9 +157,6 @@ public class AddItemToDiaryActivity extends AppCompatActivity implements MoodAda
     @Override
     public void onItemClick(String activity, int position) {
         Toast.makeText(this, activity, Toast.LENGTH_SHORT).show();
-        if( entryActivities == null) {
-            entryActivities = new HashMap<>();
-        }
 
         if( entryActivities.get(position) != null) {
             entryActivities.remove(position);

@@ -37,16 +37,13 @@ public class MoodTrackerWidget extends AppWidgetProvider {
         Intent intent = new Intent(context, MoodRemoteViewsService.class);
         views.setRemoteAdapter(R.id.widget_mood_gridview, intent);
 
-//F        Intent actionIntent = new Intent(context,MoodTrackerWidget.class);
         Intent actionIntent = new Intent(context, MoodTrackWidgetService.class);
         actionIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
         intent.setAction(ACTION_ADD_MODD);
-
-//F         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         PendingIntent pendingIntent = PendingIntent.getService(context, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-//F        views.setPendingIntentTemplate(R.id.widget_mood_gridview, pendingIntent);
         views.setPendingIntentTemplate(R.id.widget_mood_gridview, pendingIntent);
+
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
@@ -69,14 +66,5 @@ public class MoodTrackerWidget extends AppWidgetProvider {
     public void onDisabled(Context context) {
         // Enter relevant functionality for when the last widget is disabled
     }
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context, "Clciked", Toast.LENGTH_SHORT).show();
-
-        Log.d("Factory", intent.getAction());
-        super.onReceive(context, intent);
-    }
-
 }
 

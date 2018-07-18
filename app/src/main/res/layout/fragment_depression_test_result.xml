@@ -6,7 +6,6 @@
     tools:context="com.example.android.deprecure.DepressionTestResultFragment"
     android:padding="20dp">
 
-
     <TextView
         android:id="@+id/fragment_depression_test_result"
         android:layout_width="match_parent"
@@ -14,7 +13,7 @@
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/fragment_depression_test_result_comment"
         app:layout_constraintTop_toTopOf="parent"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:textColor="@color/colorPrimary"/>
 
     <TextView
@@ -24,5 +23,4 @@
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_depression_test_result"/>
-
 </android.support.constraint.ConstraintLayout>

@@ -13,50 +13,59 @@
 
         <TextView
             android:id="@+id/diary_entry_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <ImageView
             android:id="@+id/diary_entry_smile"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:padding="5dp"
-            app:layout_constraintTop_toBottomOf="@id/diary_entry_date"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/cd_entry_mood_smile"/>
 
         <TextView
             android:id="@+id/diary_entry_activities"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Activities: "
+            android:layout_height="wrap_content"
+            android:text="@string/entry_activities_title"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/diary_entry_smile"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="5dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/diary_entry_date"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"/>
 
         <TextView
             android:id="@+id/entry_activities"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/diary_entry_smile"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/diary_entry_activities"
             />
 
-        <!--
         <TextView
-            android:id="@+id/entry_mood"
+            android:id="@+id/diary_entry_text"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        -->
+            android:layout_height="wrap_content"
+            android:text="@string/entry_diary_title"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/entry_activities"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"/>
 
         <TextView
             android:id="@+id/entry_text"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/diary_entry_smile"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/diary_entry_text"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
             android:layout_marginEnd="5dp"
             android:layout_marginStart="5dp"/>

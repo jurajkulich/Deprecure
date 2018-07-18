@@ -1,5 +1,6 @@
 package com.example.android.deprecure;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -27,7 +28,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DiaryActivity extends AppCompatActivity implements DiaryEntriesAdapter.OnClickListener{
+public class DiaryActivity extends AppCompatActivity {
 
     @BindView(R.id.diary_fab_add_button)
     FloatingActionButton mFab;
@@ -38,9 +39,12 @@ public class DiaryActivity extends AppCompatActivity implements DiaryEntriesAdap
     @BindView(R.id.diary_toolbar)
     Toolbar mToolbar;
 
+    private LinearLayoutManager mLinearLayoutManager;
     private DiaryEntriesAdapter mDiaryEntriesAdapter;
-
     private ArrayList<DiaryEntry> mDiaryEntries;
+
+    private int positionIndex;
+    private int offset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +56,23 @@ public class DiaryActivity extends AppCompatActivity implements DiaryEntriesAdap
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mDiaryEntries = new ArrayList<>();
-        mDiaryEntriesAdapter = new DiaryEntriesAdapter(mDiaryEntries, this);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mDiaryEntriesAdapter = new DiaryEntriesAdapter(mDiaryEntries);
+        mLinearLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.setAdapter(mDiaryEntriesAdapter);
 
+        getData();
+
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AddItemToDiaryActivity.class);
+                startActivityForResult(intent, 0);
+            }
+        });
+    }
+
+    private void getData() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         db.collection("users").document(uid).collection("diary")
@@ -63,15 +80,16 @@ public class DiaryActivity extends AppCompatActivity implements DiaryEntriesAdap
                 new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        mDiaryEntries.clear();
                         if( task.isSuccessful()) {
                             for(QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                                 DiaryEntry entry = documentSnapshot.toObject(DiaryEntry.class);
                                 mDiaryEntries.add(entry);
-                                Log.d("Diary", documentSnapshot.getId() + " => " + documentSnapshot.getData());
-                                Log.d("Diary", entry.getTextEntry() + entry.getActivityEntries() + entry.getMood().getMoodName());
-
                             }
                             mDiaryEntriesAdapter.updateAdapter(mDiaryEntries);
+                            if( positionIndex != -1) {
+                                mLinearLayoutManager.scrollToPositionWithOffset(positionIndex, offset);
+                            }
                         } else {
                             Log.d("Diary", "Error getting documents: ", task.getException());
                         }
@@ -79,19 +97,6 @@ public class DiaryActivity extends AppCompatActivity implements DiaryEntriesAdap
                 }
 
         );
-
-        mFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), AddItemToDiaryActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-    @Override
-    public void onItemClick(String activity) {
-
     }
 
     @Override
@@ -103,5 +108,33 @@ public class DiaryActivity extends AppCompatActivity implements DiaryEntriesAdap
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if( requestCode == 0) {
+            if( resultCode == RESULT_OK) {
+                getData();
+            }
+        }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        positionIndex = savedInstanceState.getInt("POSITION");
+        offset = savedInstanceState.getInt("OFFSET");
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        positionIndex = mLinearLayoutManager.findFirstVisibleItemPosition();
+        View start = mRecyclerView.getChildAt(0);
+        offset = (start == null) ? 0 : (start.getTop() - mRecyclerView.getPaddingTop());
+        Log.d("Diary", positionIndex + "");
+        outState.putInt("POSITION", positionIndex);
+        outState.putInt("OFFSET", offset);
     }
 }

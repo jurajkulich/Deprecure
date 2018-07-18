@@ -65,25 +65,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/not_at_all"
-            android:checked="true"/>
+            android:checked="true"
+            android:contentDescription="@string/cd_radio_not_at_all"/>
 
         <RadioButton
             android:id="@+id/radio_several_days"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/several_days"/>
+            android:text="@string/several_days"
+            android:contentDescription="@string/cd_radio_several_days"/>
 
         <RadioButton
             android:id="@+id/radio_more_than_half"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/more_than_half_the_days"/>
+            android:text="@string/more_than_half_the_days"
+            android:contentDescription="@string/cd_radio_more_than_half"/>
 
         <RadioButton
             android:id="@+id/radio_nearly_every_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/nearly_every_day"/>
+            android:text="@string/nearly_every_day"
+            android:contentDescription="@string/cd_radio_nearly_every_day"/>
 
     </RadioGroup>
 

@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Track mood to diary"
+        android:text="@string/widget_title"
         android:gravity="center"
         android:textSize="18sp"/>
 

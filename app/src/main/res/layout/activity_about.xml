@@ -5,17 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.android.deprecure.AboutActivity">
-    
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/about_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title="@string/about_toolbar"
+        android:background="@color/colorAccent"
+        android:fitsSystemWindows="true"
+        android:elevation="4dp"/>
+
     <TextView
         android:id="@+id/about_smiles"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Smiles pack is designed by Smartline from Flaticon."/>
+        android:text="@string/smiles_pack_is_designed"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/about_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/about_toolbar"
+        app:layout_constraintVertical_chainStyle="spread"/>
 
     <TextView
         android:id="@+id/about_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This app is a capstone project for Android Developer Nanodegree from Udacity."/>
+        android:text="@string/about_udacity"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/about_smiles"
+        app:layout_constraintVertical_chainStyle="spread"/>
 
 </android.support.constraint.ConstraintLayout>

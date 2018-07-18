@@ -18,6 +18,28 @@
     <string name="depression_strong_comment">If you’re having a bad thoughts and you are thinking about hurting or killing yourself
         please reach out straight away and talk to someone who’s trained to help. Even if you feel like no-one in the world gets you right now, there are people who can support you.</string>
     <string name="depression_weak_comment">You\'re doing very well! Keep it up!</string>
+    <string name="smiles_pack_is_designed">Smiles pack is designed by Smartline from Flaticon.</string>
+    <string name="about_udacity">This app is a capstone project for Android Developer Nanodegree from Udacity.</string>
+    <string name="add_item_activities_question">What have you been up to?</string>
+    <string name="add_item_text_question">What are your thoughts?</string>
+    <string name="add_item_text_question_hint">Thought</string>
+    <string name="about_toolbar">About</string>
+    <string name="add_item_toolbar">Add diary entry</string>
+    <string name="diary_toolbar">Diary</string>
+    <string name="sign_in_or_register">Sign In or Register</string>
+    <string name="test_button">Test</string>
+    <string name="diary_button">Diary</string>
+    <string name="about_button">About</string>
+    <string name="cd_entry_mood_smile">Smile referencing to mood</string>
+    <string name="entry_activities_title">Activities:</string>
+    <string name="entry_diary_title">Diary:</string>
+    <string name="widget_title">Track mood to diary</string>
+    <string name="cd_add_text">Text input for diary text</string>
+    <string name="cd_radio_not_at_all">Button when the answer on question is not at all</string>
+    <string name="cd_radio_several_days">Button when the answer on question is several days</string>
+    <string name="cd_radio_more_than_half">Button when the answer on question is more than half days</string>
+    <string name="cd_radio_nearly_every_day">Button when the answer on question is nearly every day</string>
+    <string name="cd_logo_of_application">Logo of application</string>
 
 
 </resources>

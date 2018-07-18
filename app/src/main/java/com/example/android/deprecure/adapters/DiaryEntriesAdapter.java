@@ -28,17 +28,19 @@ import java.util.Date;
 
 public class DiaryEntriesAdapter extends RecyclerView.Adapter<DiaryEntriesAdapter.ViewHolder> {
 
-    public interface OnClickListener {
-        void onItemClick(String activity);
-    }
-
     private ArrayList<DiaryEntry> mDiaryEntries;
     private Context mContext;
-    private final OnClickListener mOnClickListener;
 
-    public DiaryEntriesAdapter(ArrayList<DiaryEntry> mDiaryEntries, OnClickListener onClickListener) {
+    Date currentDate;
+    Date yesterdayDate;
+
+    public DiaryEntriesAdapter(ArrayList<DiaryEntry> mDiaryEntries) {
         this.mDiaryEntries = mDiaryEntries;
-        this.mOnClickListener = onClickListener;
+
+        Calendar mCalendar = Calendar.getInstance();
+        currentDate = mCalendar.getTime();
+        mCalendar.add(Calendar.DATE, -1);
+        yesterdayDate = mCalendar.getTime();
     }
 
     @NonNull
@@ -57,26 +59,24 @@ public class DiaryEntriesAdapter extends RecyclerView.Adapter<DiaryEntriesAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final DiaryEntry diaryEntry = mDiaryEntries.get(position);
         Log.d("Adapter", diaryEntry.getTextEntry());
+
         holder.mEntryText.setText(diaryEntry.getTextEntry());
-        // holder.mEntryMood.setText(diaryEntry.getMood().getMoodName());
         holder.mMoodSmile.setImageResource(diaryEntry.getMood().getMoodDrawableId());
         setSmileColor(holder, diaryEntry.getMood().getMoodName());
         holder.mEntryDate.setText(dateToString(diaryEntry.getEntryDate()));
 
         String activities = "";
-        if( diaryEntry.getActivityEntries() != null) {
-            for (String activity : diaryEntry.getActivityEntries()) {
-                activities += activity + " ";
+        if( diaryEntry.getActivityEntries() != null)  {
+            for (int i = 0; i < diaryEntry.getActivityEntries().size(); i++) {
+                String activity = diaryEntry.getActivityEntries().get(i);
+                if( i + 1 <= diaryEntry.getActivityEntries().size() - 1) {
+                    activities += activity + ", ";
+                } else {
+                    activities += activity;
+                }
             }
         }
         holder.mEntryActivities.setText(activities);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mOnClickListener.onItemClick("");
-            }
-        });
-
     }
 
     @Override
@@ -91,12 +91,18 @@ public class DiaryEntriesAdapter extends RecyclerView.Adapter<DiaryEntriesAdapte
         public TextView mEntryDate;
         public ImageView mMoodSmile;
 
+        public TextView mEntryTextTitle;
+        public TextView mEntryActivitiesTitle;
+
         public ViewHolder( View itemView ) {
             super(itemView);
             mEntryText = itemView.findViewById(R.id.entry_text);
             mEntryActivities = itemView.findViewById(R.id.entry_activities);
             mEntryDate = itemView.findViewById(R.id.diary_entry_date);
             mMoodSmile = itemView.findViewById(R.id.diary_entry_smile);
+
+            mEntryActivitiesTitle = itemView.findViewById(R.id.diary_entry_activities);
+            mEntryTextTitle = itemView.findViewById(R.id.diary_entry_text);
         }
     }
 
@@ -139,20 +145,21 @@ public class DiaryEntriesAdapter extends RecyclerView.Adapter<DiaryEntriesAdapte
     }
 
     public String dateToString(Date date) {
-        DateFormat simpleDateFormat = new SimpleDateFormat("EEEE MM/dd/yyyy HH:mm");
-        Calendar calendar = Calendar.getInstance();
-        Date currentDate = calendar.getTime();
-        calendar.add(Calendar.DATE, -1);
-        Date yesterdayDate = calendar.getTime();
-        String entryDate = simpleDateFormat.format(date);
-        String today = simpleDateFormat.format(currentDate);
-        String yesterday = simpleDateFormat.format(yesterdayDate);
-        if( entryDate.substring(0, 14).equals(today.substring(0, 14))) {
-            return "Today" + entryDate.substring(entryDate.length() - 6, entryDate.length());
-        } else if(entryDate.substring(0, 14).equals(yesterday.substring(0, 14))) {
-            return "Yesterday" + entryDate.substring(entryDate.length() - 6, entryDate.length());
-        } else {
-            return entryDate;
+        if( date != null) {
+            DateFormat simpleDateFormat = new SimpleDateFormat("EEEE MM/dd/yyyy HH:mm");
+
+            String entryDate = simpleDateFormat.format(date);
+            String today = simpleDateFormat.format(currentDate);
+            String yesterday = simpleDateFormat.format(yesterdayDate);
+
+            if (entryDate.substring(0, 14).equals(today.substring(0, 14))) {
+                return "Today" + entryDate.substring(entryDate.length() - 6, entryDate.length());
+            } else if (entryDate.substring(0, 14).equals(yesterday.substring(0, 14))) {
+                return "Yesterday" + entryDate.substring(entryDate.length() - 6, entryDate.length());
+            } else {
+                return entryDate;
+            }
         }
+        return "Now";
     }
 }

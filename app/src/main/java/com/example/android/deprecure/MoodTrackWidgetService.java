@@ -44,6 +44,9 @@ public class    MoodTrackWidgetService extends IntentService {
     }
 
     private void handleAddMoodService(Mood mood) {
+        if(FirebaseAuth.getInstance().getCurrentUser() == null) {
+            return;
+        }
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DiaryEntry diaryEntry = new DiaryEntry("", null, mood);
