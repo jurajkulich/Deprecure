@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.android.deprecure.adapters.DiaryEntriesAdapter;
 import com.example.android.deprecure.model.DiaryEntry;
@@ -91,6 +92,7 @@ public class DiaryActivity extends AppCompatActivity {
                                 mLinearLayoutManager.scrollToPositionWithOffset(positionIndex, offset);
                             }
                         } else {
+                            Toast.makeText(DiaryActivity.this, "Error getting data", Toast.LENGTH_SHORT).show();
                             Log.d("Diary", "Error getting documents: ", task.getException());
                         }
                     }
