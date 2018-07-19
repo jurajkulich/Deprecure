@@ -1,13 +1,10 @@
 package com.example.android.deprecure;
 
-import android.support.v4.app.Fragment;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.android.deprecure.adapters.ScreenTestSlidePagerAdapter;
 
@@ -63,8 +60,6 @@ public class DepressionTestActivity extends FragmentActivity implements ScreenTe
             findViewById(R.id.depression_test_result_placeholder).setVisibility(View.VISIBLE);
             return;
         }
-
-        // Toast.makeText(this, position + ": " + answer, Toast.LENGTH_SHORT).show();
         answers[position] = answer;
         if( position < 8) {
             mViewPager.setCurrentItem(++position);

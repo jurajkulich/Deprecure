@@ -1,11 +1,9 @@
 package com.example.android.deprecure;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -13,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.example.android.deprecure.adapters.ActivityAdapter;
 import com.example.android.deprecure.adapters.MoodAdapter;
@@ -23,9 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,12 +58,14 @@ public class AddItemToDiaryActivity extends AppCompatActivity implements MoodAda
     private String savedText;
     private ArrayList<Integer> savedActivities;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item_to_diary);
         ButterKnife.bind(this);
 
+        // saving instance of selected mood, activities and text
         savedMood = -1;
         savedText = "";
         if( savedInstanceState != null) {
@@ -74,7 +73,6 @@ public class AddItemToDiaryActivity extends AppCompatActivity implements MoodAda
             savedText = savedInstanceState.getString("TEXT");
             savedActivities = savedInstanceState.getIntegerArrayList("ACTIVITIES");
         }
-
 
         if( entryActivities == null) {
             entryActivities = new HashMap<>();
@@ -98,13 +96,14 @@ public class AddItemToDiaryActivity extends AppCompatActivity implements MoodAda
         moods.add(new Mood("Crying",
                 getResources().getIdentifier("crying", "drawable", "com.example.android.deprecure")));
 
-        activities.add("Running");
-        activities.add("Working");
-        activities.add("Sleeping");
-        activities.add("Learning");
-        activities.add("Crying");
-        activities.add("Cycling");
-        activities.add("Playing football");
+        activities.add("playing sports");
+        activities.add("working");
+        activities.add("sleeping");
+        activities.add("learning");
+        activities.add("crying");
+        activities.add("reading");
+        activities.add("watching TV");
+        activities.add("listening to music");
 
         mMoodRecyclerView.setLayoutManager(
                 new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL) {
@@ -130,34 +129,32 @@ public class AddItemToDiaryActivity extends AppCompatActivity implements MoodAda
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // we'll decide if we update adapter by result
+                // user have to select mood
                 if( entryMood == null ) {
                     Toast.makeText(AddItemToDiaryActivity.this, "You have to choose the mood!", Toast.LENGTH_SHORT).show();
                     setResult(Activity.RESULT_CANCELED);
                 }
+                Date currentDate = Calendar.getInstance().getTime();
                 entryText = mTextEditText.getText().toString();
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 FirebaseFirestore database = FirebaseFirestore.getInstance();
-                DiaryEntry diaryEntry = new DiaryEntry(entryText, new ArrayList<String>(entryActivities.values()), entryMood);
+                DiaryEntry diaryEntry = new DiaryEntry(entryText, new ArrayList<String>(entryActivities.values()), entryMood, currentDate);
                 database.collection("users").document(uid).collection("diary").document().set(diaryEntry);
                 setResult(Activity.RESULT_OK);
                 finish();
             }
         });
-
-
-
     }
 
     @Override
     public void onItemClick(Mood mood) {
-        Toast.makeText(this, mood.getMoodName(), Toast.LENGTH_SHORT).show();
         entryMood = mood;
     }
 
     @Override
     public void onItemClick(String activity, int position) {
-        Toast.makeText(this, activity, Toast.LENGTH_SHORT).show();
-
+        // we are saving clicked activities so we can deselect them when clicked again
         if( entryActivities.get(position) != null) {
             entryActivities.remove(position);
         } else {

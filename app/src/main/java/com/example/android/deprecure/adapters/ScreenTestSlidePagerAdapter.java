@@ -6,8 +6,6 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.android.deprecure.ScreenTestSlideFragment;
 
-import java.util.ArrayList;
-
 /**
  * Created by Juraj on 6/27/2018.
  */

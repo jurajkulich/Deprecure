@@ -1,15 +1,12 @@
 package com.example.android.deprecure;
 
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
-import android.widget.Toast;
 
-import com.example.android.deprecure.R;
 import com.example.android.deprecure.model.Mood;
 
 import java.util.ArrayList;

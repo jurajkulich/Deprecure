@@ -1,22 +1,16 @@
 package com.example.android.deprecure;
 
 import android.app.IntentService;
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.android.deprecure.model.DiaryEntry;
 import com.example.android.deprecure.model.Mood;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.Calendar;
 
 
 /**
@@ -44,12 +38,14 @@ public class    MoodTrackWidgetService extends IntentService {
     }
 
     private void handleAddMoodService(Mood mood) {
+        // when is no one logged in, widget click is ignored
         if(FirebaseAuth.getInstance().getCurrentUser() == null) {
             return;
         }
+        // adding mood as diaryEntry to diary in background
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DiaryEntry diaryEntry = new DiaryEntry("", null, mood);
+        DiaryEntry diaryEntry = new DiaryEntry("", null, mood, Calendar.getInstance().getTime());
         database.collection("users").document(uid)
                 .collection("diary").document().set(diaryEntry);
         Log.d("SERVICE", "Added");

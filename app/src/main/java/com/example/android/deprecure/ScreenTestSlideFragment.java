@@ -8,10 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +21,7 @@ public class ScreenTestSlideFragment extends Fragment implements View.OnClickLis
 
     public interface OnAnswerClick{
         void clickedAnswer(int answer, int position);
-    };
+    }
 
     OnAnswerClick mOnAnswerClick;
 
@@ -62,6 +59,7 @@ public class ScreenTestSlideFragment extends Fragment implements View.OnClickLis
         View rootView = inflater.inflate(R.layout.fragment_screen_test_slide, container, false);
         ButterKnife.bind(this, rootView);
 
+        // each widget is loaded with different question
         Bundle bundle = this.getArguments();
         if( bundle != null) {
             question = bundle.getString("QUESTION");
@@ -83,8 +81,6 @@ public class ScreenTestSlideFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-
-        // boolean checked = ((RadioButton) view).isChecked();
 
         switch (view.getId()) {
             case R.id.radio_not_at_all: {

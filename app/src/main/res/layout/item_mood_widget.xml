@@ -12,7 +12,8 @@
         android:id="@+id/mood_widget_smile"
         android:layout_width="42dp"
         android:layout_height="42dp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:contentDescription="@string/cd_item_mood"/>
 
     <TextView
         android:id="@+id/mood_widget_name"

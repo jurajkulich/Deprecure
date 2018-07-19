@@ -26,10 +26,12 @@ public class DiaryEntry {
     @ServerTimestamp
     private Date entryDate;
 
-    public DiaryEntry(String textEntry, ArrayList<String> activityEntries, Mood mood) {
+    // we add local date first, so we can show date offline
+    public DiaryEntry(String textEntry, ArrayList<String> activityEntries, Mood mood, Date date) {
         this.textEntry = textEntry;
         this.activityEntries = activityEntries;
         mMood = mood;
+        entryDate = date;
     }
 
     public DiaryEntry() {

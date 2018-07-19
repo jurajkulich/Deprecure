@@ -7,6 +7,7 @@ package com.example.android.deprecure.model;
 public class Mood {
 
     private String moodName;
+    // saving smile drawable id on device
     private int moodDrawableId;
 
     public Mood(String moodName, int moodDrawableId) {

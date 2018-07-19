@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,16 +62,16 @@ public class DepressionTestResultFragment extends Fragment {
         }
 
         if( mResult <= 4) {
-            mResultTextView.setText("None depression");
-            mResultComment.setText("You're doing very well! Keep it up!");
+            mResultTextView.setText(R.string.none_depression);
+            mResultComment.setText(R.string.none_depression_text);
         } else if( mResult <= 9) {
-            mResultTextView.setText("Mild depression");
+            mResultTextView.setText(R.string.mild_depression);
         } else if( mResult <= 14) {
-            mResultTextView.setText("Moderate depression");
+            mResultTextView.setText(R.string.moderate_depression);
         } else if( mResult <= 19) {
-            mResultTextView.setText("Moderately severe depression");
+            mResultTextView.setText(R.string.moderately_severe_depression);
         } else {
-            mResultTextView.setText("Severe depression");
+            mResultTextView.setText(R.string.severe_depression);
         }
 
         return rootView;

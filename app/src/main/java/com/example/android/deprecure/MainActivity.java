@@ -1,17 +1,13 @@
 package com.example.android.deprecure;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +18,6 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 199;
-    // private static final String USER_UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     private FirebaseAuth auth;
 
@@ -34,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         auth = FirebaseAuth.getInstance();
+        // when is user logged in we'll open menu
         if( auth.getCurrentUser() != null) {
             Intent intent = new Intent(this, PrimaryMenuActivity.class);
             startActivity(intent);
@@ -44,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        // opening FirebaseUI on click
         mLoginTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
         if( requestCode == RC_SIGN_IN) {
             if( resultCode == RESULT_OK) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 showSignInScreen();
             }
         }
