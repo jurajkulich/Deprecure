@@ -8,8 +8,10 @@ import android.util.Log;
 import com.example.android.deprecure.model.DiaryEntry;
 import com.example.android.deprecure.model.Mood;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
@@ -43,11 +45,10 @@ public class    MoodTrackWidgetService extends IntentService {
             return;
         }
         // adding mood as diaryEntry to diary in background
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DiaryEntry diaryEntry = new DiaryEntry("", null, mood, Calendar.getInstance().getTime());
-        database.collection("users").document(uid)
-                .collection("diary").document().set(diaryEntry);
+        DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
+        firebaseDatabase.child("users").child(uid).child("diary").push().setValue(diaryEntry);
         Log.d("SERVICE", "Added");
     }
 }

@@ -17,7 +17,8 @@ import com.example.android.deprecure.adapters.MoodAdapter;
 import com.example.android.deprecure.model.DiaryEntry;
 import com.example.android.deprecure.model.Mood;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -133,15 +134,14 @@ public class AddItemToDiaryActivity extends AppCompatActivity implements MoodAda
                 // user have to select mood
                 if( entryMood == null ) {
                     Toast.makeText(AddItemToDiaryActivity.this, "You have to choose the mood!", Toast.LENGTH_SHORT).show();
-                    setResult(Activity.RESULT_CANCELED);
+                    return;
                 }
                 Date currentDate = Calendar.getInstance().getTime();
                 entryText = mTextEditText.getText().toString();
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                FirebaseFirestore database = FirebaseFirestore.getInstance();
+                DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
                 DiaryEntry diaryEntry = new DiaryEntry(entryText, new ArrayList<String>(entryActivities.values()), entryMood, currentDate);
-                database.collection("users").document(uid).collection("diary").document().set(diaryEntry);
-                setResult(Activity.RESULT_OK);
+                firebaseDatabase.child("users").child(uid).child("diary").push().setValue(diaryEntry);
                 finish();
             }
         });

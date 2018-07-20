@@ -1,7 +1,5 @@
 package com.example.android.deprecure.model;
 
-import com.google.firebase.firestore.ServerTimestamp;
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -23,7 +21,6 @@ public class DiaryEntry {
         this.entryDate = entryDate;
     }
 
-    @ServerTimestamp
     private Date entryDate;
 
     // we add local date first, so we can show date offline

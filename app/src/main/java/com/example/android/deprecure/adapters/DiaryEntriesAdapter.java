@@ -18,6 +18,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 
 /**
@@ -34,6 +35,7 @@ public class DiaryEntriesAdapter extends RecyclerView.Adapter<DiaryEntriesAdapte
 
     public DiaryEntriesAdapter(ArrayList<DiaryEntry> mDiaryEntries) {
         this.mDiaryEntries = mDiaryEntries;
+        Collections.reverse(this.mDiaryEntries);
 
         Calendar mCalendar = Calendar.getInstance();
         currentDate = mCalendar.getTime();
@@ -139,6 +141,7 @@ public class DiaryEntriesAdapter extends RecyclerView.Adapter<DiaryEntriesAdapte
 
     public void updateAdapter(ArrayList<DiaryEntry> mDiaryEntries) {
         this.mDiaryEntries = mDiaryEntries;
+        Collections.reverse(this.mDiaryEntries);
         notifyDataSetChanged();
     }
 
