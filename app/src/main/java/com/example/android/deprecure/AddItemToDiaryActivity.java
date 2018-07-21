@@ -15,6 +15,7 @@ import com.example.android.deprecure.adapters.ActivityAdapter;
 import com.example.android.deprecure.adapters.MoodAdapter;
 import com.example.android.deprecure.model.DiaryEntry;
 import com.example.android.deprecure.model.Mood;
+import com.example.android.deprecure.widgets.EntryCounterWidgetService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -138,9 +139,8 @@ public class AddItemToDiaryActivity extends AppCompatActivity implements MoodAda
                 Date currentDate = Calendar.getInstance().getTime();
                 entryText = mTextEditText.getText().toString();
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
                 DiaryEntry diaryEntry = new DiaryEntry(entryText, new ArrayList<String>(entryActivities.values()), entryMood, currentDate);
-                firebaseDatabase.child("users").child(uid).child("diary").push().setValue(diaryEntry);
+                DatabaseHelper.addDataEntry(diaryEntry);
                 EntryCounterWidgetService.startEntryCounterWidgetService(getApplicationContext());
                 finish();
             }

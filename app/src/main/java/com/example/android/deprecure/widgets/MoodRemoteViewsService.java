@@ -1,4 +1,4 @@
-package com.example.android.deprecure;
+package com.example.android.deprecure.widgets;
 
 import android.content.Intent;
 import android.widget.RemoteViewsService;

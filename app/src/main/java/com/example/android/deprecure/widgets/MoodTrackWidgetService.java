@@ -1,10 +1,11 @@
-package com.example.android.deprecure;
+package com.example.android.deprecure.widgets;
 
 import android.app.IntentService;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.example.android.deprecure.DatabaseHelper;
 import com.example.android.deprecure.model.DiaryEntry;
 import com.example.android.deprecure.model.Mood;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,7 +24,7 @@ public class    MoodTrackWidgetService extends IntentService {
     public static final String ACTION_ADD_MODD = "android.deprecure.action.add_mood";
 
     public MoodTrackWidgetService() {
-        super("com.example.android.deprecure.MoodTrackWidgetService");
+        super("com.example.android.deprecure.widgets.MoodTrackWidgetService");
     }
 
     @Override
@@ -44,10 +45,8 @@ public class    MoodTrackWidgetService extends IntentService {
             return;
         }
         // adding mood as diaryEntry to diary in background
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DiaryEntry diaryEntry = new DiaryEntry("", null, mood, Calendar.getInstance().getTime());
-        DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
-        firebaseDatabase.child("users").child(uid).child("diary").push().setValue(diaryEntry);
+        DatabaseHelper.addDataEntry(diaryEntry);
         EntryCounterWidgetService.startEntryCounterWidgetService(this);
         Log.d("SERVICE", "Added");
     }

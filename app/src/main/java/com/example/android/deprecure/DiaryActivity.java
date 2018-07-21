@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.android.deprecure.adapters.DiaryEntriesAdapter;
 import com.example.android.deprecure.model.DiaryEntry;
+import com.example.android.deprecure.widgets.EntryCounterWidgetService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -64,6 +65,12 @@ public class DiaryActivity extends AppCompatActivity {
 
         // loading adapter with firebase data
         getData();
+        saveCountertoSharedPref(mDiaryEntries.size());
+        mDiaryEntriesAdapter.updateAdapter(mDiaryEntries);
+        if( positionIndex != -1) {
+            mLinearLayoutManager.scrollToPositionWithOffset(positionIndex, offset);
+        }
+        EntryCounterWidgetService.startEntryCounterWidgetService(getApplicationContext());
 
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,10 +82,8 @@ public class DiaryActivity extends AppCompatActivity {
     }
 
     private void getData() {
-        DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        firebaseDatabase.child("users").child(uid).child("diary").addValueEventListener(new ValueEventListener() {
+        DatabaseHelper.getFirebaseDatabase().child("users").child(DatabaseHelper.getUid())
+                .child("diary").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int counter = 0;

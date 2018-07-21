@@ -26,7 +26,7 @@
         <activity android:name=".DepressionTestActivity"/>
         <activity android:name=".AboutActivity"/>
 
-        <receiver android:name=".MoodTrackerWidget">
+        <receiver android:name=".widgets.MoodTrackerWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
             </intent-filter>
@@ -36,16 +36,16 @@
                 android:resource="@xml/mood_tracker_widget_info"/>
         </receiver>
 
-        <service android:name=".MoodTrackWidgetService">
+        <service android:name=".widgets.MoodTrackWidgetService">
             <intent-filter>
                 <action android:name="com.example.android.deprecure.MoodTrackWidgetService"/>
             </intent-filter>
         </service>
         <service
-            android:name=".MoodRemoteViewsService"
+            android:name=".widgets.MoodRemoteViewsService"
             android:permission="android.permission.BIND_REMOTEVIEWS"/>
 
-        <receiver android:name=".EntryCounterWidget">
+        <receiver android:name=".widgets.EntryCounterWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
             </intent-filter>
@@ -54,7 +54,7 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/entry_counter_widget_info"/>
         </receiver>
-        <service android:name=".EntryCounterWidgetService">
+        <service android:name=".widgets.EntryCounterWidgetService">
         </service>
     </application>
 

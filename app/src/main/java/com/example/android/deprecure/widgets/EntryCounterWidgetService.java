@@ -1,4 +1,4 @@
-package com.example.android.deprecure;
+package com.example.android.deprecure.widgets;
 
 import android.app.IntentService;
 import android.appwidget.AppWidgetManager;
@@ -18,7 +18,7 @@ public class EntryCounterWidgetService extends IntentService {
     public static final String ACTION_COUNTER = "android.deprecure.action.counter";
 
     public EntryCounterWidgetService() {
-        super("com.example.android.deprecure.EntryCounterWidgetService");
+        super("com.example.android.deprecure.widgets.EntryCounterWidgetService");
     }
 
     public static  void startEntryCounterWidgetService(Context context) {

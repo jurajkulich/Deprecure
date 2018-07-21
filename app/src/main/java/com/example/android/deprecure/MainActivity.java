@@ -18,6 +18,8 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static boolean isPersisted = false;
+
     private static final int RC_SIGN_IN = 199;
 
     private FirebaseAuth auth;
@@ -29,7 +31,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        if( !isPersisted) {
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+            isPersisted = true;
+        }
+
 
         auth = FirebaseAuth.getInstance();
         // when is user logged in we'll open menu

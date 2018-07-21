@@ -1,4 +1,4 @@
-package com.example.android.deprecure;
+package com.example.android.deprecure.widgets;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.widget.RemoteViews;
 
-import static com.example.android.deprecure.MoodTrackWidgetService.ACTION_ADD_MODD;
+import com.example.android.deprecure.R;
 
 /**
  * Implementation of App Widget functionality.
@@ -27,7 +27,7 @@ public class MoodTrackerWidget extends AppWidgetProvider {
         Intent actionIntent = new Intent(context, MoodTrackWidgetService.class);
         actionIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
-        intent.setAction(ACTION_ADD_MODD);
+        intent.setAction(MoodTrackWidgetService.ACTION_ADD_MODD);
         PendingIntent pendingIntent = PendingIntent.getService(context, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setPendingIntentTemplate(R.id.widget_mood_gridview, pendingIntent);
 

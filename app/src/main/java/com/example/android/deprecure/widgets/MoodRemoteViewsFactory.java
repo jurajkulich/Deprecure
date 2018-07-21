@@ -1,4 +1,4 @@
-package com.example.android.deprecure;
+package com.example.android.deprecure.widgets;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,11 +7,10 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import com.example.android.deprecure.R;
 import com.example.android.deprecure.model.Mood;
 
 import java.util.ArrayList;
-
-import static com.example.android.deprecure.MoodTrackWidgetService.ACTION_ADD_MODD;
 
 /**
  * Created by Juraj on 7/8/2018.
@@ -58,7 +57,7 @@ public class MoodRemoteViewsFactory implements RemoteViewsService.RemoteViewsFac
         bundle.putString("WIDGET_MOOD", mood.getMoodName());
         bundle.putInt("WIDGET_MOOD_SMILE", mood.getMoodDrawableId());
         Intent intent = new Intent();
-        intent.setAction(ACTION_ADD_MODD);
+        intent.setAction(MoodTrackWidgetService.ACTION_ADD_MODD);
         intent.putExtras(bundle);
         Log.d("RemoteViews", mood.getMoodName());
         remoteViews.setOnClickFillInIntent(R.id.mood_item_widget_layout,  intent);
