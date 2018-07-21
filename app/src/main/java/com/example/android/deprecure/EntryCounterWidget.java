@@ -3,11 +3,7 @@ package com.example.android.deprecure;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
-
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 /**
  * Implementation of App Widget functionality.

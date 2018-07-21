@@ -10,7 +10,6 @@ import android.view.View;
 import com.example.android.deprecure.adapters.ScreenTestSlidePagerAdapter;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
