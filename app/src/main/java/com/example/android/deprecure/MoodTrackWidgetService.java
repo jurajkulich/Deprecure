@@ -49,6 +49,7 @@ public class    MoodTrackWidgetService extends IntentService {
         DiaryEntry diaryEntry = new DiaryEntry("", null, mood, Calendar.getInstance().getTime());
         DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
         firebaseDatabase.child("users").child(uid).child("diary").push().setValue(diaryEntry);
+        EntryCounterWidgetService.startEntryCounterWidgetService(this);
         Log.d("SERVICE", "Added");
     }
 }

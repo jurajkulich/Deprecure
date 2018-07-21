@@ -1,7 +1,9 @@
 package com.example.android.deprecure;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -83,16 +85,20 @@ public class DiaryActivity extends AppCompatActivity {
         firebaseDatabase.child("users").child(uid).child("diary").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int counter = 0;
+                mDiaryEntries.clear();
                 for( DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     DiaryEntry diaryEntry = snapshot.getValue(DiaryEntry.class);
                     mDiaryEntries.add(diaryEntry);
+                    counter++;
                     Log.d("Diary", diaryEntry.getTextEntry());
                 }
-
                 mDiaryEntriesAdapter.updateAdapter(mDiaryEntries);
                 if( positionIndex != -1) {
                     mLinearLayoutManager.scrollToPositionWithOffset(positionIndex, offset);
                 }
+                saveCountertoSharedPref(counter);
+                EntryCounterWidgetService.startEntryCounterWidgetService(getApplicationContext());
             }
 
             @Override
@@ -101,6 +107,13 @@ public class DiaryActivity extends AppCompatActivity {
                 Log.d("Diary", "Error getting documents: ", databaseError.toException());
             }
         });
+    }
+
+    private void saveCountertoSharedPref(int counter) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("COUNTER", counter);
+        editor.apply();
     }
 
     @Override
