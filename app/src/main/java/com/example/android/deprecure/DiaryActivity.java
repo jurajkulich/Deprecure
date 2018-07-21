@@ -1,7 +1,9 @@
 package com.example.android.deprecure;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -15,13 +17,12 @@ import android.widget.Toast;
 
 import com.example.android.deprecure.adapters.DiaryEntriesAdapter;
 import com.example.android.deprecure.model.DiaryEntry;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -74,31 +75,41 @@ public class DiaryActivity extends AppCompatActivity {
     }
 
     private void getData() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        db.collection("users").document(uid).collection("diary")
-                .orderBy("entryDate", Query.Direction.DESCENDING).get().addOnCompleteListener(
-                new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        mDiaryEntries.clear();
-                        if( task.isSuccessful()) {
-                            for(QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                                DiaryEntry entry = documentSnapshot.toObject(DiaryEntry.class);
-                                mDiaryEntries.add(entry);
-                            }
-                            mDiaryEntriesAdapter.updateAdapter(mDiaryEntries);
-                            if( positionIndex != -1) {
-                                mLinearLayoutManager.scrollToPositionWithOffset(positionIndex, offset);
-                            }
-                        } else {
-                            Toast.makeText(DiaryActivity.this, "Error getting data", Toast.LENGTH_SHORT).show();
-                            Log.d("Diary", "Error getting documents: ", task.getException());
-                        }
-                    }
-                }
 
-        );
+        firebaseDatabase.child("users").child(uid).child("diary").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int counter = 0;
+                mDiaryEntries.clear();
+                for( DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    DiaryEntry diaryEntry = snapshot.getValue(DiaryEntry.class);
+                    mDiaryEntries.add(diaryEntry);
+                    counter++;
+                    Log.d("Diary", diaryEntry.getTextEntry());
+                }
+                mDiaryEntriesAdapter.updateAdapter(mDiaryEntries);
+                if( positionIndex != -1) {
+                    mLinearLayoutManager.scrollToPositionWithOffset(positionIndex, offset);
+                }
+                saveCountertoSharedPref(counter);
+                EntryCounterWidgetService.startEntryCounterWidgetService(getApplicationContext());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(DiaryActivity.this, "Error getting data", Toast.LENGTH_SHORT).show();
+                Log.d("Diary", "Error getting documents: ", databaseError.toException());
+            }
+        });
+    }
+
+    private void saveCountertoSharedPref(int counter) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("COUNTER", counter);
+        editor.apply();
     }
 
     @Override
@@ -110,17 +121,6 @@ public class DiaryActivity extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if( requestCode == 0) {
-            // we'll update adapter data when new entry is added
-            if( resultCode == RESULT_OK) {
-                getData();
-            }
-        }
     }
 
     @Override
